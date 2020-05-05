@@ -17,15 +17,13 @@ table = {
         'C4': ';'
         }
 
-def print_message(midi):
+def sendkey(midi):
     key = midi.getMidiNoteName(midi.getNoteNumber())
     if key not in table:
         return
     if midi.isNoteOn():
-        print('ON: ', midi.getMidiNoteName(midi.getNoteNumber()), midi.getVelocity())
         keyboard.press(table[key])
     elif midi.isNoteOff():
-        print('OFF:', midi.getMidiNoteName(midi.getNoteNumber()))
         keyboard.release(table[key])
 
 ports = range(midiin.getPortCount())
@@ -35,6 +33,6 @@ if ports:
     while True:
         m = midiin.getMessage(0)
         if m:
-            print_message(m)
+            sendkey(m)
 else:
     print('NO MIDI INPUT PORTS!')
