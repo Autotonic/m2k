@@ -34,7 +34,7 @@ class M2K:
         ports = range(self.midi.getPortCount())
         if ports:
             print("Running")
-            self.midi.openPort(0)
+            self.midi.openPort(1)
             while True:
                 if midi_message := self.midi.getMessage(0):
                     self.send_key(midi_message)
